@@ -40,7 +40,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "http://localhost:5173", 
+  origin: "https://chatapp-frontend-3hdy.onrender.com", 
   credentials: true,
 };
 
