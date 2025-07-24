@@ -39,9 +39,26 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
+// const corsOptions = {
+//   origin: "https://chatapp-frontend-3hdy.onrender.com", 
+//   credentials: true,
+// };
+
+const allowedOrigins = [
+    "http://localhost:5173", // For local development
+    "https://chatapp-frontend-3hdy.onrender.com" // 👈 YOUR LIVE FRONTEND URL
+];
+
+// Reusable CORS options for both Express and Socket.IO
 const corsOptions = {
-  origin: "https://chatapp-frontend-3hdy.onrender.com", 
-  credentials: true,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
